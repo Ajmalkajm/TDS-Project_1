@@ -1,5 +1,5 @@
 - **An explanation of how data is scraped**  
-  Used the GitHub API with Python’s requests library to retrieve data on users in Bangalore with over 100 followers, querying paginated results for detailed user and repository information while applying a delay to respect GitHub’s rate limits. Data fields, such as company names, were cleaned and formatted, and the finalized user and repository details were saved to CSV files.
+  Used the GitHub API with Python’s requests library to retrieve data on users in Bangalore with over 100 followers, querying paginated results for detailed user and repository information. Data fields, such as company names, were cleaned and formatted, and the finalized user and repository details were saved to CSV files.
 
 - **The most interesting and surprising fact found after analyzing the data**  
   The most common language used across repositories is Jupyter Notebook, particularly for data science and machine learning projects, suggesting that data-centric development is popular.
