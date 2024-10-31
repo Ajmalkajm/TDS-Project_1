@@ -4,5 +4,5 @@
 - **The most interesting and surprising fact found after analyzing the data**  
   The most common language used across repositories is Jupyter Notebook, particularly for data science and machine learning projects, suggesting that data-centric development is popular.
 
-- **Actionable recommendation for developers based on analysis** 
+- **Actionable recommendation for developers based on analysis**  
   A significant number of repositories lack licensing information, which can limit reuse and collaboration, as developers might be uncertain about usage rights. Adding clear licenses to repositories can encourage others to use, modify, and contribute to the projects, potentially increasing their impact and visibility.
