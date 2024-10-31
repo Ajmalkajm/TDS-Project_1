@@ -2,17 +2,17 @@ import requests
 import csv
 import time
 
-# GitHub API token and headers for authentication
+
 TOKEN = "your_personal_access_token_here"
 HEADERS = {"Authorization": f"token {TOKEN}"}
 
-# Helper function to clean company names
+
 def clean_company_name(name):
     if name:
         name = name.strip().lstrip("@").upper()
     return name
 
-# Function to get users in Bangalore with over 100 followers
+
 def get_bangalore_users(min_followers=100, location="Bangalore"):
     users = []
     url = f"https://api.github.com/search/users?q=location:{location}+followers:>{min_followers}&per_page=100"
@@ -30,7 +30,6 @@ def get_bangalore_users(min_followers=100, location="Bangalore"):
             break
 
         for user in items:
-            # Fetch detailed user data
             user_details = requests.get(user['url'], headers=HEADERS).json()
             user_info = {
                 "login": user_details.get("login", ""),
@@ -51,7 +50,6 @@ def get_bangalore_users(min_followers=100, location="Bangalore"):
 
     return users
 
-# Function to get up to 500 repositories for each user
 def get_user_repositories(username):
     repos = []
     url = f"https://api.github.com/users/{username}/repos?per_page=100"
@@ -67,7 +65,7 @@ def get_user_repositories(username):
         if not data:
             break
 
-        for repo in data[:500]:  # Limit to 500 repos per user
+        for repo in data[:500]: 
             repo_info = {
                 "login": username,
                 "full_name": repo.get("full_name", ""),
@@ -81,11 +79,10 @@ def get_user_repositories(username):
             }
             repos.append(repo_info)
         page += 1
-        time.sleep(1)  # Avoid rate limit
+        time.sleep(1) 
 
     return repos
 
-# Function to save user data to CSV
 def save_users_to_csv(users, filename="users.csv"):
     with open(filename, mode="w", newline="", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=[
@@ -95,7 +92,6 @@ def save_users_to_csv(users, filename="users.csv"):
         writer.writeheader()
         writer.writerows(users)
 
-# Function to save repository data to CSV
 def save_repos_to_csv(repos, filename="repositories.csv"):
     with open(filename, mode="w", newline="", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=[
@@ -104,14 +100,10 @@ def save_repos_to_csv(repos, filename="repositories.csv"):
         ])
         writer.writeheader()
         writer.writerows(repos)
-
-# Main function
+        
 def main():
-    # Step 1: Get users from Bangalore with more than 100 followers
     users = get_bangalore_users()
     save_users_to_csv(users)
-
-    # Step 2: Get each user's repositories and save them to repositories.csv
     all_repos = []
     for user in users:
         print(f"Fetching repositories for user: {user['login']}")
